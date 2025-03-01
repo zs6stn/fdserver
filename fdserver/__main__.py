@@ -5,7 +5,7 @@
 # COLOR_BLUE	Blue
 # COLOR_CYAN	Cyan (light greenish blue)
 # COLOR_GREEN	Green
-# COLOR_MAGENTA	Magenta (purplish red)
+# COLOR_WHITE	Magenta (purplish red)
 # COLOR_RED	Red
 # COLOR_WHITE	White
 # COLOR_YELLOW	Yellow
@@ -645,17 +645,17 @@ def main(_):
     curses.start_color()
     curses.use_default_colors()
     if curses.can_change_color():
-        curses.init_color(curses.COLOR_MAGENTA, 1000, 640, 0)
-        curses.init_color(curses.COLOR_BLACK, 0, 0, 0)
-        curses.init_color(curses.COLOR_CYAN, 500, 500, 500)
-        curses.init_pair(1, curses.COLOR_MAGENTA, -1)
-        curses.init_pair(2, curses.COLOR_RED, -1)
-        curses.init_pair(3, curses.COLOR_CYAN, -1)
-        curses.init_pair(4, curses.COLOR_GREEN, -1)
-        curses.init_pair(5, curses.COLOR_BLUE, -1)
-        curses.init_pair(6, curses.COLOR_YELLOW, -1)
+        curses.init_color(curses.COLOR_WHITE, 1000, 640, 0)
+        curses.init_color(curses.COLOR_WHITE, 0, 0, 0)
+        curses.init_color(curses.COLOR_WHITE, 500, 500, 500)
+        curses.init_pair(1, curses.COLOR_WHITE, -1)
+        curses.init_pair(2, curses.COLOR_WHITE, -1)
+        curses.init_pair(3, curses.COLOR_WHITE, -1)
+        curses.init_pair(4, curses.COLOR_WHITE, -1)
+        curses.init_pair(5, curses.COLOR_WHITE, -1)
+        curses.init_pair(6, curses.COLOR_WHITE, -1)
         curses.init_pair(7, curses.COLOR_WHITE, -1)
-        curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_MAGENTA)
+        curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_WHITE)
     curses.noecho()
     curses.cbreak()
     THE_SCREEN.attron(curses.color_pair(8))
