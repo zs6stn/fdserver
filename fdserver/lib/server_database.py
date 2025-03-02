@@ -36,7 +36,7 @@ class DataBase:
                 )
                 cursor.execute(sql_table)
                 conn.commit()
-                
+
             with sqlite3.connect(self.database) as conn:
                 cursor = conn.cursor()
                 sql_table = (
@@ -320,7 +320,7 @@ class DataBase:
                 sql = (
                     "INSERT INTO chat"
                     "(date_time, message) "
-                    "VALUES(?,?)"
+                    "VALUES(?,?);"
                 )
                 cur.execute(sql, logme)
                 conn.commit()
