@@ -33,15 +33,20 @@ class DataBase:
                     "grid text NOT NULL, "
                     "opname text NOT NULL, "
                     "station text NOT NULL);"
-                    "    "
-                     "CREATE TABLE IF NOT EXISTS chat "
+                )
+                cursor.execute(sql_table)
+                conn.commit()
+                
+            with sqlite3.connect(self.database) as conn:
+                cursor = conn.cursor()
+                sql_table = (
+                    "CREATE TABLE IF NOT EXISTS chat "
                     "(id INTEGER PRIMARY KEY, "
                     "date_time text NOT NULL, "
                     "message text NOT NULL );"
                 )
                 cursor.execute(sql_table)
                 conn.commit()
-
         except sqlite3.Error as exception:
             logging.critical("create_db: Unable to create database: %s", exception)
 
