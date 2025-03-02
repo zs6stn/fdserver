@@ -911,7 +911,7 @@ def main(_):
                     packet["sender"] = "Server"
                     packet["message"] = message
                     print(f"message: {message}")
-                    DB.log_chat((
+                    DB.log_chat(
                         (datetime.now().strftime("%Y-%m-%d %H-%M-%S"),
                         message
                         )
