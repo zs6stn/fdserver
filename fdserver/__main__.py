@@ -866,7 +866,9 @@ def main(_):
                 continue
 
             if json_data.get("cmd") == "CHAT":
-                DB.log_chat((datetime.now().strftime("%Y-%m-%d %H-%M-%S"), f"{json_data.get("sender")}: {json_data.get("message")}"))
+                sender = json_data.get("sender")
+                message = json_data.get("message")
+                DB.log_chat((datetime.now().strftime("%Y-%m-%d %H-%M-%S"), f"{sender}: {message}"))
                 if "@stats" in json_data.get("message"):
                     bands = ["160", "80", "40", "20", "15", "10", "6", "2"]
                     blist = []
