@@ -36,6 +36,17 @@ class DataBase:
                 )
                 cursor.execute(sql_table)
                 conn.commit()
+
+                cursor = conn.cursor()
+                sql_table = (
+                    "CREATE TABLE IF NOT EXISTS chat "
+                    "(id INTEGER PRIMARY KEY, "
+                    "date_time text NOT NULL, "
+                    "message text NOT NULL );"
+                )
+                cursor.execute(sql_table)
+                conn.commit()
+
         except sqlite3.Error as exception:
             logging.critical("create_db: Unable to create database: %s", exception)
 
@@ -297,3 +308,21 @@ class DataBase:
                 f"callsign = '{call}' AND band = '{band}' AND mode = '{mode}';"
             )
             return cursor.fetchone()[0]
+    
+    def log_chat(self, logme: tuple) -> None:
+        """
+        Inserts a chat into the db.
+        pass in (date_time, message)
+        """
+        try:
+            with sqlite3.connect(self.database) as conn:
+                cur = conn.cursor()
+                sql = (
+                    "INSERT INTO chat"
+                    "(date_time, message) "
+                    "VALUES(?,?)"
+                )
+                cur.execute(sql, logme)
+                conn.commit()
+        except sqlite3.Error as exception:
+            logging.debug("DataBase log_chat: %s", exception)

@@ -5,7 +5,7 @@
 # COLOR_BLUE	Blue
 # COLOR_CYAN	Cyan (light greenish blue)
 # COLOR_GREEN	Green
-# COLOR_WHITE	Magenta (purplish red)
+# COLOR_MAGENTA	Magenta (purplish red)
 # COLOR_RED	Red
 # COLOR_WHITE	White
 # COLOR_YELLOW	Yellow
@@ -187,7 +187,7 @@ def ptitle(win, y, x1, x2, title):
     title_length = len(title)
     middle_window = x2 - (x2 - x1) / 2
     x = int(middle_window - (title_length / 2))
-    win.addstr(y, x, title, curses.color_pair(7))
+    win.addstr(y, x, title)
     win.addch(y, x - 1, curses.ACS_RTEE)
     win.addch(y, x + title_length, curses.ACS_LTEE)
 
@@ -312,7 +312,7 @@ def comm_log():
             blist.append(count[0])
     QUEWINDOW.clear()
     # QUEWINDOW.box()
-    QUEWINDOW.addstr(0, 0, "Band   CW    PH    DI", curses.color_pair(1))
+    QUEWINDOW.addstr(0, 0, "Band   CW    PH    DI")
     for yline, band in enumerate(bands):
         cwt = DB.get_band_mode_tally(band, "CW")
         dit = DB.get_band_mode_tally(band, "DI")
@@ -351,7 +351,7 @@ def show_people():
                     xcol,
                     f"{op_callsign.rjust(6,' ')} {people.get(op_callsign).rjust(6, ' ')}",
                     13,
-                    curses.color_pair(2) | curses.A_BOLD,
+                    
                 )
             else:
                 PEOPLEWINDOW.addnstr(
@@ -384,9 +384,9 @@ def get_stats():
 
     score = (((QRP * 3) * BATTERYPOWER) + 2) * _points
 
-    THE_SCREEN.addstr(2, 73, f"{score}", curses.color_pair(7))
-    THE_SCREEN.addstr(3, 73, f"{lasthour}", curses.color_pair(7))
-    THE_SCREEN.addstr(4, 73, f"{last15}", curses.color_pair(7))
+    THE_SCREEN.addstr(2, 73, f"{score}")
+    THE_SCREEN.addstr(3, 73, f"{lasthour}")
+    THE_SCREEN.addstr(4, 73, f"{last15}")
 
 
 def fakefreq(band, mode):
@@ -645,23 +645,23 @@ def main(_):
     curses.start_color()
     curses.use_default_colors()
     if curses.can_change_color():
-        curses.init_color(curses.COLOR_WHITE, 1000, 640, 0)
-        curses.init_color(curses.COLOR_WHITE, 0, 0, 0)
-        curses.init_color(curses.COLOR_WHITE, 500, 500, 500)
-        curses.init_pair(1, curses.COLOR_WHITE, -1)
-        curses.init_pair(2, curses.COLOR_WHITE, -1)
-        curses.init_pair(3, curses.COLOR_WHITE, -1)
-        curses.init_pair(4, curses.COLOR_WHITE, -1)
-        curses.init_pair(5, curses.COLOR_WHITE, -1)
-        curses.init_pair(6, curses.COLOR_WHITE, -1)
+        curses.init_color(curses.COLOR_MAGENTA, 1000, 640, 0)
+        curses.init_color(curses.COLOR_BLACK, 0, 0, 0)
+        curses.init_color(curses.COLOR_CYAN, 500, 500, 500)
+        curses.init_pair(1, curses.COLOR_MAGENTA, -1)
+        curses.init_pair(2, curses.COLOR_RED, -1)
+        curses.init_pair(3, curses.COLOR_CYAN, -1)
+        curses.init_pair(4, curses.COLOR_GREEN, -1)
+        curses.init_pair(5, curses.COLOR_BLUE, -1)
+        curses.init_pair(6, curses.COLOR_YELLOW, -1)
         curses.init_pair(7, curses.COLOR_WHITE, -1)
-        curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_WHITE)
+        curses.init_pair(8, curses.COLOR_BLACK, curses.COLOR_MAGENTA)
     curses.noecho()
     curses.cbreak()
-    THE_SCREEN.attron(curses.color_pair(8))
+    #THE_SCREEN.attron(curses.color_pair(8))
     line = f"Field Day aggregation server v{__version__}".center(width, " ")
     THE_SCREEN.addstr(0, 0, line)
-    THE_SCREEN.attron(curses.color_pair(1))
+    #THE_SCREEN.attron(curses.color_pair(1))
     THE_SCREEN.addstr(
         1,
         0,
@@ -669,27 +669,27 @@ def main(_):
     )
 
     THE_SCREEN.addstr(2, 2, "Call____:")
-    THE_SCREEN.addstr(f" {OURCALL}", curses.color_pair(7))
+    THE_SCREEN.addstr(f" {OURCALL}")
     THE_SCREEN.addstr(3, 2, "Class___:")
-    THE_SCREEN.addstr(f" {OURCLASS}", curses.color_pair(7))
+    THE_SCREEN.addstr(f" {OURCLASS}")
     THE_SCREEN.addstr(4, 2, "Section_:")
-    THE_SCREEN.addstr(f" {OURSECTION}", curses.color_pair(7))
+    THE_SCREEN.addstr(f" {OURSECTION}")
     # THE_SCREEN.addstr(5, 2, "Battery_:")
-    # THE_SCREEN.addstr(f" {bool(BATTERYPOWER)}", curses.color_pair(7))
+    # THE_SCREEN.addstr(f" {bool(BATTERYPOWER)}")
 
     THE_SCREEN.addstr(2, 25, "Multicast Group: ")
-    THE_SCREEN.addstr(f"{MULTICAST_GROUP}", curses.color_pair(7))
+    THE_SCREEN.addstr(f"{MULTICAST_GROUP}")
     THE_SCREEN.addstr(3, 25, "Multicast Port_: ")
-    THE_SCREEN.addstr(f"{MULTICAST_PORT}", curses.color_pair(7))
+    THE_SCREEN.addstr(f"{MULTICAST_PORT}")
     THE_SCREEN.addstr(4, 25, "Interface IP___: ")
-    THE_SCREEN.addstr(f"{INTERFACE_IP}", curses.color_pair(7))
+    THE_SCREEN.addstr(f"{INTERFACE_IP}")
 
     THE_SCREEN.addstr(2, 60, "Points_____: ")
-    THE_SCREEN.addstr(f"{POINTS}", curses.color_pair(7))
+    THE_SCREEN.addstr(f"{POINTS}")
     THE_SCREEN.addstr(3, 60, "Last Hour__: ")
-    THE_SCREEN.addstr(f"{LASTHOUR}", curses.color_pair(7))
+    THE_SCREEN.addstr(f"{LASTHOUR}")
     THE_SCREEN.addstr(4, 60, "Last 15 Min: ")
-    THE_SCREEN.addstr(f"{LAST15}", curses.color_pair(7))
+    THE_SCREEN.addstr(f"{LAST15}")
 
     rectangle(THE_SCREEN, 6, 0, 23, 50)
     rectangle(THE_SCREEN, 6, 50, 16, 79)
@@ -910,6 +910,11 @@ def main(_):
                     packet = {"cmd": "CHAT"}
                     packet["sender"] = "Server"
                     packet["message"] = message
+                    DB.log_chat((
+                        datetime.now(),
+                        message
+                        )
+                    )
                     bytes_to_send = bytes(dumps(packet), encoding="ascii")
                     try:
                         s.sendto(bytes_to_send, (MULTICAST_GROUP, int(MULTICAST_PORT)))
