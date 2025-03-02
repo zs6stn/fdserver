@@ -33,13 +33,8 @@ class DataBase:
                     "grid text NOT NULL, "
                     "opname text NOT NULL, "
                     "station text NOT NULL);"
-                )
-                cursor.execute(sql_table)
-                conn.commit()
-
-                cursor = conn.cursor()
-                sql_table = (
-                    "CREATE TABLE IF NOT EXISTS chat "
+                    "    "
+                     "CREATE TABLE IF NOT EXISTS chat "
                     "(id INTEGER PRIMARY KEY, "
                     "date_time text NOT NULL, "
                     "message text NOT NULL );"
