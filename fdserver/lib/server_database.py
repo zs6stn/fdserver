@@ -47,6 +47,7 @@ class DataBase:
                 )
                 cursor.execute(sql_table)
                 conn.commit()
+ 
         except sqlite3.Error as exception:
             logging.critical("create_db: Unable to create database: %s", exception)
 
