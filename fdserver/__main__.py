@@ -866,6 +866,7 @@ def main(_):
                 continue
 
             if json_data.get("cmd") == "CHAT":
+                DB.log_chat((datetime.now().strftime("%Y-%m-%d %H-%M-%S"), f"{json_data.get("sender")}: {json_data.get("message")}"))
                 if "@stats" in json_data.get("message"):
                     bands = ["160", "80", "40", "20", "15", "10", "6", "2"]
                     blist = []
@@ -911,11 +912,11 @@ def main(_):
                     packet["sender"] = "Server"
                     packet["message"] = message
                     print(f"message: {message}")
-                    DB.log_chat(
-                        (datetime.now().strftime("%Y-%m-%d %H-%M-%S"),
-                        message
-                        )
-                    )
+                    # DB.log_chat(
+                    #     (datetime.now().strftime("%Y-%m-%d %H-%M-%S"),
+                    #     message
+                    #     )
+                    # )
                     bytes_to_send = bytes(dumps(packet), encoding="ascii")
                     try:
                         s.sendto(bytes_to_send, (MULTICAST_GROUP, int(MULTICAST_PORT)))
