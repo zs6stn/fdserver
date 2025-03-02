@@ -41,7 +41,7 @@ except ModuleNotFoundError:
 
 if Path("./debug").exists():
     logging.basicConfig(
-        filename="server_debug.log",
+        filename="debug.log",
         filemode="w+",
         format=(
             "[%(asctime)s] %(levelname)s %(module)s - "
@@ -910,8 +910,9 @@ def main(_):
                     packet = {"cmd": "CHAT"}
                     packet["sender"] = "Server"
                     packet["message"] = message
+                    print(f"message: {message}")
                     DB.log_chat((
-                        datetime.now(),
+                        (datetime.now().strftime("%Y-%m-%d %H-%M-%S"),
                         message
                         )
                     )
